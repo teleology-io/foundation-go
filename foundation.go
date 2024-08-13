@@ -28,8 +28,16 @@ func Str(value string) *string {
 	return &value
 }
 
-func New(url string, apiKey string, uid *string) *Foundation {
-	f := &Foundation{
+var (
+	instance *Foundation
+)
+
+func Create(url string, apiKey string, uid *string) *Foundation {
+	if instance != nil {
+		return instance
+	}
+
+	instance = &Foundation{
 		url:       url,
 		apiKey:    apiKey,
 		uid:       uid,
@@ -43,9 +51,9 @@ func New(url string, apiKey string, uid *string) *Foundation {
 		}),
 	}
 
-	go f.realtime()
+	go instance.realtime()
 
-	return f
+	return instance
 }
 
 func (f *Foundation) realtime() {

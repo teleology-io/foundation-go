@@ -18,7 +18,7 @@ import (
 )
 
 func main() {
-	f := foundation.New("https://foundation-api.teleology.io", "<your_api_key>", foundation.Str(""))
+	f := foundation.Create("https://foundation-api.teleology.io", "<your_api_key>", foundation.Str(""))
 
 	// get realtime updates
 	f.Subscribe(func(event string, data interface{}, err error) {
